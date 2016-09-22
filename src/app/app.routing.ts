@@ -1,6 +1,6 @@
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
-import { TasksComponent } from './tasks/tasks.component';
 
 const appRoutes: Routes = [
     {
@@ -10,7 +10,7 @@ const appRoutes: Routes = [
     },
     {
         path: 'dashboard',
-        component: TasksComponent
+        component: DashboardComponent
     }
 ];
 
