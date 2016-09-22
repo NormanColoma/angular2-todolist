@@ -1,0 +1,23 @@
+/**These are necessary stub componnets when testing 
+ * App Component which contains router-outlet */
+
+export { ActivatedRoute, Router, RouterLink, RouterOutlet} from '@angular/router';
+
+import { Component, Directive, Injectable, Input } from '@angular/core';
+@Directive({
+  selector: '[routerLink]',
+  host: {
+    '(click)': 'onClick()'
+  }
+})
+export class RouterLinkStubDirective {
+  @Input('routerLink') linkParams: any;
+  navigatedTo: any = null;
+
+  onClick() {
+    this.navigatedTo = this.linkParams;
+  }
+}
+
+@Component({selector: 'router-outlet', template: ''})
+export class RouterOutletStubComponent { }
