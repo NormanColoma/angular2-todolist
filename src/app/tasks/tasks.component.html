@@ -1,8 +1,25 @@
-<p>
-  tasks works!
-</p>
-<ul>
-    <li *ngFor="let task of tasks">
-      <a>{{task.name}}</a>
-    </li>
-</ul>
+<div class="col-md-12">
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">Tasks</div>
+
+      <!-- List group -->
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let task of tasks">
+          
+          <h4>{{task.name}}</h4>
+          <p>{{task.description}}</p>
+          <div class="progress" *ngIf="!task.pending">
+            <div class="progress-bar progress-bar-success" style="width: 100%">
+              100%
+            </div>
+          </div>
+          <div class="progress" *ngIf="task.pending">
+            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;">
+              0%
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+</div>
