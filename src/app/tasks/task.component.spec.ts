@@ -15,22 +15,28 @@ describe('Tasks Component', () => {
 
     describe('Using stubs', () => {
         beforeEach(async(() => {
+
+            // Configure and create the component
             TestBed.configureTestingModule({
                 imports: [HttpModule],
                 declarations: [TasksComponent],
                 providers: [{ provide: TaskService, useClass: StubTaskService }]
             })
                 .compileComponents();
+
+            //Get the component
             fixture = TestBed.createComponent(TasksComponent);
             component = fixture.componentInstance;
 
+            //Get the service injected in the component
             taskService = fixture.debugElement.injector.get(TaskService);
         }));
 
         it('should get the tasks', async(() => {
-            let stub = new StubTaskService();
+            let stub = new StubTaskService();  //Have a look at testing/task.service.stub.ts file
             fixture.detectChanges();          // trigger data binding
 
+            //Wait for async operation
             fixture.whenStable().then(() => {
                 fixture.detectChanges();
                 expect(component.tasks).toEqual(stub.fakeTasks);
@@ -68,6 +74,7 @@ describe('Tasks Component', () => {
                     'pending': true
                 }
             ];
+            //Configure the spy on the service. When calling getTasks return fakeTasks.
             spy = spyOn(taskService, 'getTasks')
                 .and.returnValue(Observable.of(fakeTasks));
         }));
