@@ -16,6 +16,8 @@ import {
     async, inject, TestBed
 } from '@angular/core/testing';
 
+import { Observable }     from 'rxjs';
+
 
 describe('TaskService (mockBackend)', () => {
 
@@ -80,6 +82,29 @@ describe('TaskService (mockBackend)', () => {
             service.getTasks().subscribe(tasks => {
                     expect(tasks).toBe(fakeTasks);
                 });
+        })));
+    });
+
+    describe('when getTasks and exception occurred', () => {
+        let backend: MockBackend;
+        let service: TaskService;
+        let response: Response;
+        let error: String;
+
+        beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
+            backend = be;
+            service = new TaskService(http);
+            error = 'There was an error while retrieving the data from the server';
+            let options = new ResponseOptions({ status: 500, body: { data: error } });
+            response = new Response(options);
+        }));
+
+        it('should have expected exception', async(inject([], () => {
+            backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
+
+            service.getTasks().subscribe(err => {
+                expect(err).toBe(error);
+            });
         })));
     });
 

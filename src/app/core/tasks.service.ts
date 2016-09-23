@@ -15,7 +15,16 @@ export class TaskService {
         return body.data || { };
     }
 
+    private handleError(error: any) {
+        let errMsg = (error.message) ? error.message :
+            error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+        console.error(errMsg);
+        return Observable.throw(errMsg);
+    }
+
     getTasks(): Observable <Task[]> {
-        return this.http.get(this.tasksUrl).map(this.extractData);
+        return this.http.get(this.tasksUrl)
+        .map(this.extractData)
+        .catch(this.handleError);
     }
 }
