@@ -16,8 +16,6 @@ import {
     async, inject, TestBed
 } from '@angular/core/testing';
 
-import { Observable }     from 'rxjs';
-
 
 describe('TaskService (mockBackend)', () => {
 
