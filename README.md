@@ -1,31 +1,24 @@
-# Angular2Todolist
+# Angular 2 Todolist
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.15.
+This project is based on Angular 2 (2.0.0 final release). The main purpose is to provide a good example
+on how to start from the scratch a web application following the official documentation, style guide and Angular 2 best
+practices.
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Installing and setting up
 
-## Code scaffolding
+Just clone this repository or download the .zip directly.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class`.
+### Dependencies
 
-## Build
+Before running the app, you will need to install some dependencies of which run on Node.js. For setting up everything
+correctly, just follow the steps below:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+1. Download and install [Node.js here](https://nodejs.org/en/download/).
+2. Install [Angular CLI](https://cli.angular.io/)
+3. Once you cloned the repository, cd into *angular2-todolist* and run the following command:
 
-## Running unit tests
+> **Command:** npm install
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Back-end Data
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/). 
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Deploying to Github Pages
-
-Run `ng github-pages:deploy` to deploy to Github Pages.
-
-## Further help
-
-To get more help on the `angular-cli` use `ng --help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Since the project is fetching the data from external simple API and interacting with it, you can either, clone it or modify the project and make use of your own API or simply mock the data.
