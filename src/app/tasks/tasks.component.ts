@@ -10,11 +10,29 @@ import { Task } from './task';
 export class TasksComponent implements OnInit {
 
   tasks: Task[];
+  removed: Boolean;
+  errorMessage: String;
 
   constructor(private taskService: TaskService) { }
 
   ngOnInit() {
     this.taskService.getTasks().subscribe(tasks => this.tasks = tasks);
+  }
+
+  deleteTask(id: String) {
+
+    this.taskService.deleteTask(id).subscribe(
+      removed => this.removeFromArray(id, removed),
+      error => this.errorMessage = error
+    );
+  }
+
+  private removeFromArray(id: String, removed: Boolean) {
+    let index = this.tasks.findIndex(task => task._id === id);
+    if (index >= 0) {
+      this.tasks.splice(index, 1);
+      this.removed = removed;
+    }
   }
 
 }

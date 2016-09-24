@@ -23,4 +23,12 @@ export class StubTaskService {
     getTasks(): Observable<Task[]> {
         return Observable.of(this.fakeTasks);
     }
+
+    deleteTask(id: String): Observable<Boolean> {
+        if (id === '57e16a1055808a1d88211492') {
+            return Observable.throw('There was an error while deleting the task');
+        }else {
+            return Observable.of(true);
+        }
+    }
 }
