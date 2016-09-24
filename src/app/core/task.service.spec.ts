@@ -19,6 +19,12 @@ import {
 
 describe('TaskService (mockBackend)', () => {
 
+    let backend: MockBackend;
+    let service: TaskService;
+    let fakeTasks: Task[];
+    let response: Response;
+    let error: String;
+
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [HttpModule],
@@ -30,20 +36,18 @@ describe('TaskService (mockBackend)', () => {
             .compileComponents();
     }));
 
+    beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
+        backend = be;
+        service = new TaskService(http);
+    }));
+
     it('can instantiate service when inject service',
-    inject([TaskService], (service: TaskService) => {
-      expect(service instanceof TaskService).toBe(true);
+    inject([TaskService], (s: TaskService) => {
+      expect(s instanceof TaskService).toBe(true);
     }));
     describe('when getTasks', () => {
 
-        let backend: MockBackend;
-        let service: TaskService;
-        let fakeTasks: Task[];
-        let response: Response;
-
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
-            backend = be;
-            service = new TaskService(http);
             fakeTasks = [
                 {
                     '_id': '57e1699cd09bf01ccd5d1442',
@@ -84,14 +88,8 @@ describe('TaskService (mockBackend)', () => {
     });
 
     describe('when getTasks and exception occurred', () => {
-        let backend: MockBackend;
-        let service: TaskService;
-        let response: Response;
-        let error: String;
 
         beforeEach(inject([Http, XHRBackend], (http: Http, be: MockBackend) => {
-            backend = be;
-            service = new TaskService(http);
             error = 'There was an error while retrieving the data from the server';
             let options = new ResponseOptions({ status: 500, body: { data: error } });
             response = new Response(options);
@@ -104,6 +102,32 @@ describe('TaskService (mockBackend)', () => {
                 expect(err).toBe(error);
             });
         })));
+    });
+
+    describe('when deleteTask(id)', () => {
+
+        it('should delete the task correctly', async(inject([], () => {
+            let options = new ResponseOptions({ status: 200 , body: {data: true}});
+            response = new Response(options);
+            backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
+
+            service.deleteTask('123').subscribe(res => {
+                expect(res).toBeTruthy();
+            });
+
+        })));
+
+        it('should return false when error', () => {
+            error = 'There was an error when deleting the task';
+            let options = new ResponseOptions({ status: 500, body: { data: error } });
+            response = new Response(options);
+            backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
+
+            service.deleteTask('123').subscribe(err => {
+                expect(err).toBe(error);
+            });
+
+        });
     });
 
 });

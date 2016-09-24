@@ -24,7 +24,14 @@ export class TaskService {
 
     getTasks(): Observable <Task[]> {
         return this.http.get(this.tasksUrl)
-        .map(this.extractData)
-        .catch(this.handleError);
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    deleteTask(id: String): Observable <Boolean> {
+        const url = this.tasksUrl + '/' + id;
+        return this.http.delete(url)
+            .map(this.extractData)
+            .catch(this.handleError);
     }
 }
