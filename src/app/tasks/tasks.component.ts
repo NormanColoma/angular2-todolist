@@ -20,6 +20,7 @@ export class TasksComponent implements OnInit {
   }
 
   deleteTask(id: String) {
+    this.removed = false;
     this.taskService.deleteTask(id).subscribe(
       removed => this.removeFromArray(id, removed),
       error => this.errorMessage = error
