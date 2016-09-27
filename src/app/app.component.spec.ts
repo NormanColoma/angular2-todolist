@@ -19,8 +19,8 @@ describe('Component: Dashboard', () => {
       TestBed.configureTestingModule({
         declarations: [
             AppComponent,
-            RouterLinkStubDirective,
-            RouterOutletStubComponent
+            RouterLinkStubDirective, //Stub links 
+            RouterOutletStubComponent //Stub RouterOutlet
             ],
       });
 
@@ -50,6 +50,7 @@ describe('Component: Dashboard', () => {
         fixture.detectChanges(); // trigger data binding
         expect(element.nativeElement.textContent).toContain(component.title);
     });
+
 
     it('can get RouterLinks from template', () => {
       expect(links.length).toBe(2, 'should have 2 links');
