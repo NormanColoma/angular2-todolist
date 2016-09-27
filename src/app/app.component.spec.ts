@@ -57,7 +57,7 @@ describe('Component: Dashboard', () => {
       expect(links[1].linkParams).toBe('/tasks/new');
     });
 
-    it('can click Heroes link in template', () => {
+    it('can click link in the template', () => {
       const addTaskLinkDe = linkDes[1];
       const addTaskLink = links[1];
 
