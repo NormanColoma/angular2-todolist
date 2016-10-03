@@ -36,7 +36,7 @@ export class TaskService {
     }
 
     addTask(t: Task): Observable<Task> {
-        let body = JSON.stringify({ t });
+        let body = JSON.stringify(t);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.tasksUrl, body, options)

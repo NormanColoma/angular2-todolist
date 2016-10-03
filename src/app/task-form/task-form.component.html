@@ -3,15 +3,18 @@
 <form>
   <div class="form-group">
     <label for="name">Name of the task:</label>
-    <input type="text" class="form-control" id="name">
+    <input type="text" class="form-control" 
+    [(ngModel)]="newTask.name" id="name" name="name">
   </div>
   <div class="form-group">
     <label for="description">Description:</label>
-    <textarea class="form-control" id="description"></textarea>
+    <textarea class="form-control" id="description" 
+    [(ngModel)]="newTask.description" name="description"></textarea>
   </div>
   <div class="form-group">
     <label for="author">Author:</label>
-    <input type="text" class="form-control" id="author">
+    <input type="text" class="form-control" 
+    [(ngModel)]="newTask.author" name= "author" id="author">
   </div>
-  <button type="submit" class="btn btn-default">Add Task</button>
+  <button type="submit" class="btn btn-default" (click)="addTask(newTask)">Add Task</button>
 </form>
