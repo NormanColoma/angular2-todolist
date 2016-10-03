@@ -11,6 +11,7 @@ export class TaskFormComponent implements OnInit {
 
   tasks: Task[];
   newTask: Task;
+  errorMessage: String;
 
   constructor(private taskService: TaskService) {
     this.newTask = new Task();
@@ -21,7 +22,9 @@ export class TaskFormComponent implements OnInit {
   }
 
   addTask(task: Task) {
-     this.taskService.addTask(task).subscribe(taskCreated => this.tasks.push(taskCreated));
+     this.taskService.addTask(task).subscribe(
+       taskCreated => this.tasks.push(taskCreated),
+       error => this.errorMessage = error);
   }
 
 }
