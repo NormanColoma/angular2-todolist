@@ -117,13 +117,47 @@ describe('TaskService (mockBackend)', () => {
 
         })));
 
-        it('should return false when error', () => {
+        it('should return error message when error', () => {
             error = 'There was an error when deleting the task';
             let options = new ResponseOptions({ status: 500, body: { data: error } });
             response = new Response(options);
             backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
 
             service.deleteTask('123').subscribe(err => {
+                expect(err).toBe(error);
+            });
+
+        });
+    });
+
+    describe('when add newTask(task)', () => {
+        let task = {
+                '_id': '57e1699cd09bf01cxd5d1442',
+                'name': 'New Task',
+                'description': 'New Task was created',
+                'author': 'Norman',
+                'created_at': new Date('2016-09-20T16:53:48.668Z'),
+                'pending': true
+            };
+
+        it('should add the task correctly', async(inject([], () => {
+            let options = new ResponseOptions({ status: 201 , body: {data: task}});
+            response = new Response(options);
+            backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
+
+            service.addTask(task).subscribe(res => {
+                expect(res).toEqual(task);
+            });
+
+        })));
+
+        it('should return error message', () => {
+            error = 'There was an error when adding the task';
+            let options = new ResponseOptions({ status: 500, body: { data: error } });
+            response = new Response(options);
+            backend.connections.subscribe((c: MockConnection) => c.mockRespond(response));
+
+            service.addTask(task).subscribe(err => {
                 expect(err).toBe(error);
             });
 
