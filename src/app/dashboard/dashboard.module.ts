@@ -1,3 +1,4 @@
+import { TaskFormComponent } from './../task-form/task-form.component';
 import { TasksComponent } from './../tasks/tasks.component';
 import { SharedModule } from './../shared/shared.module';
 import { DashboardComponent } from './dashboard.component';
@@ -10,6 +11,6 @@ import { dashboardRouting } from './dashboard.routing';
     SharedModule,
     dashboardRouting
   ],
-  declarations: [DashboardComponent, TasksComponent]
+  declarations: [DashboardComponent, TasksComponent, TaskFormComponent]
 })
 export class DashboardModule { }
