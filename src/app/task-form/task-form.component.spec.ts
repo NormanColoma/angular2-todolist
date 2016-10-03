@@ -18,6 +18,8 @@ describe('Task Form Component', () => {
 
      describe('When adding new task', () => {
         beforeEach(async(() => {
+
+          // Configure the NgModule for the component and create it
             TestBed.configureTestingModule({
                 imports: [HttpModule, FormsModule],
                 declarations: [TaskFormComponent],
@@ -56,7 +58,7 @@ describe('Task Form Component', () => {
                     'created_at': new Date('2016-09-20T16:53:48.668Z'),
                     'pending': true
                 };
-
+            // The ngOnInit method will be called
             spy = spyOn(taskService, 'getTasks')
             .and.returnValue(Observable.of(fakeTasks));
         }));
@@ -85,7 +87,7 @@ describe('Task Form Component', () => {
             fixture.detectChanges();          // trigger data binding
 
             component.addTask(newTask);
-            fixture.whenStable().then(() => {
+            fixture.whenStable().then(() => { // It should not add the new task
                 fixture.detectChanges();
                 expect(component.tasks.length).toEqual(2);
                 expect(component.errorMessage).toEqual(error);
