@@ -42,3 +42,8 @@ For the moment I've just written unit test, but I will write e2e test as soon as
 Type the following command to run unit test:  
 
 > **Command:** npm test
+
+## Forthcoming changes 
+
+* New features 
+* E2E test 
