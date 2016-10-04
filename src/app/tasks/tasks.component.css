@@ -1,0 +1,12 @@
+ul{
+    list-style: none;
+}
+
+ul li h4{
+    text-transform: uppercase;
+    color: #337ab7;
+}
+
+.btn-remove{
+    color: red;
+}
