@@ -7,6 +7,9 @@ import { Task } from './../tasks/task';
 
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { TaskFormComponent } from './task-form.component';
+import { RouterStub } from '../../testing/router-stubs';
+import { Router } from '@angular/router';
+
 
 describe('Task Form Component', () => {
     let component: TaskFormComponent;
@@ -23,7 +26,8 @@ describe('Task Form Component', () => {
             TestBed.configureTestingModule({
                 imports: [HttpModule, FormsModule],
                 declarations: [TaskFormComponent],
-                providers: [TaskService]
+                providers: [TaskService, 
+                { provide:Router, useClass:RouterStub}] //We need to fake the navigate router behaviour
             })
                 .compileComponents();
             fixture = TestBed.createComponent(TaskFormComponent);

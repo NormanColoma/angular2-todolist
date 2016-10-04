@@ -4,6 +4,7 @@
 export { ActivatedRoute, Router, RouterLink, RouterOutlet} from '@angular/router';
 
 import { Component, Directive, Injectable, Input } from '@angular/core';
+import { NavigationExtras } from '@angular/router';
 @Directive({
   selector: '[routerLink]',
   host: {
@@ -19,5 +20,12 @@ export class RouterLinkStubDirective {
   }
 }
 
+//Stub for the Outlet Router Component
 @Component({selector: 'router-outlet', template: ''})
 export class RouterOutletStubComponent { }
+
+//We stub the Router behaviour
+@Injectable()
+export class RouterStub {
+  navigate(commands: any[], extras?: NavigationExtras) { }
+}
