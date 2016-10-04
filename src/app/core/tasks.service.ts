@@ -6,7 +6,7 @@ import { Observable }     from 'rxjs';
 @Injectable()
 export class TaskService {
 
-    private tasksUrl = 'http://localhost:3000/tasks';
+    private tasksUrl = 'https://todolist-node-backend.herokuapp.com/tasks';
 
     constructor(private http: Http) { }
 
