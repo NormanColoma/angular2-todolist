@@ -1,6 +1,7 @@
 import { TaskService } from './../core/tasks.service';
 import { Task } from './../tasks/task';
 import { Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-task-form',
@@ -13,7 +14,8 @@ export class TaskFormComponent implements OnInit {
   newTask: Task;
   errorMessage: String;
 
-  constructor(private taskService: TaskService) {
+  constructor(private taskService: TaskService,
+    private router: Router) {
     this.newTask = new Task();
   }
 
@@ -22,9 +24,13 @@ export class TaskFormComponent implements OnInit {
   }
 
   addTask(task: Task) {
-     this.taskService.addTask(task).subscribe(
-       taskCreated => this.tasks.push(taskCreated),
-       error => this.errorMessage = error);
+    this.taskService.addTask(task).subscribe(
+      taskCreated => {
+        this.tasks.push(taskCreated);
+        let link = ['/dashboard'];
+        this.router.navigate(link);
+      },
+      error => this.errorMessage = error);
   }
 
 }
