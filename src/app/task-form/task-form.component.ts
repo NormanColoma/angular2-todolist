@@ -13,10 +13,12 @@ export class TaskFormComponent implements OnInit {
   tasks: Task[];
   newTask: Task;
   errorMessage: String;
+  added: Boolean;
 
   constructor(private taskService: TaskService,
     private router: Router) {
     this.newTask = new Task();
+    this.added = false;
   }
 
   ngOnInit() {
@@ -27,10 +29,17 @@ export class TaskFormComponent implements OnInit {
     this.taskService.addTask(task).subscribe(
       taskCreated => {
         this.tasks.push(taskCreated);
-        let link = ['/dashboard'];
-        this.router.navigate(link);
+        this.added = true;
       },
-      error => this.errorMessage = error);
+      error =>{ 
+        this.errorMessage = error
+        this.added = false;
+      });
+  }
+
+  goToDashboard(){
+     let link = ['/dashboard'];
+     this.router.navigate(link);
   }
 
 }
